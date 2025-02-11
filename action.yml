@@ -1,0 +1,29 @@
+name: "Semver Compare"
+description: "Compare two semantic versions with specified operator"
+author: "ArcherGu"
+branding:
+  icon: "shuffle"
+  color: "orange"
+
+inputs:
+  v1:
+    description: "First version to compare"
+    required: true
+  v2:
+    description: "Second version to compare"
+    required: true
+  operator:
+    description: "Comparison operator (>, <, =, >=, <=, !=)"
+    required: true
+  not_throw:
+    description: "If true, return false instead of throwing error when versions are invalid"
+    required: false
+    default: "false"
+
+outputs:
+  result:
+    description: "Result of the comparison (true/false)"
+
+runs:
+  using: node20
+  main: "dist/index.js"

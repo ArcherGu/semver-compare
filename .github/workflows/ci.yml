@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+
+jobs:
+  code-test:
+    if: "!contains(github.event.head_commit.message, 'skip-ci')"
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node-version: [20.x, 22.x]
+
+    runs-on: ${{ matrix.os }}
+
+    name: Code Test
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-pnpm-store
+        with:
+          path: ${{ github.workspace }}/.pnpm-store
+          key: ${{ runner.os }}-${{ matrix.node-version }}-${{ env.cache-name }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.node-version }}-${{ env.cache-name }}-
+            ${{ runner.os }}-${{ matrix.node-version }}-
+            ${{ runner.os }}-
+
+      - name: Install pnpm
+        run: npm i -g pnpm
+
+      - name: Set pnpm store path
+        run: pnpm config set store-dir .pnpm-store
+
+      - name: Install deps
+        run: pnpm i
+
+      - name: Build and Test
+        run: pnpm build && pnpm test
+
+  action-test:
+    needs: [code-test]
+
+    runs-on: ubuntu-latest
+
+    name: Action Test
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compare Versions
+        uses: ./ # Uses an action in the root directory
+        id: compare-versions
+        with:
+          v1: "v1.0.0"
+          v2: "v1.0.1"
+          operator: ">"
+          not_throw: true
+
+      - name: Get Outputs
+        run: |
+          echo "Result: ${{ steps.compare-versions.outputs.result }}"
