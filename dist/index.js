@@ -21762,6 +21762,9 @@ async function run() {
     const notThrow = core.getInput("not_throw", { required: false })?.toLowerCase() === "true";
     try {
       const result = compareVersions(v1, v2, operator);
+      if (!result) {
+        throw new Error(`Version ${v1} is not ${operator} ${v2}`);
+      }
       core.setOutput("result", result);
     } catch (error) {
       if (notThrow) {
