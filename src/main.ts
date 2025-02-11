@@ -38,18 +38,25 @@ export async function run() {
 
     try {
       const result = compareVersions(v1, v2, operator)
+      if (!result) {
+        throw new Error(`Version ${v1} is not ${operator} ${v2}`)
+      }
       core.setOutput('result', result)
-    } catch (error) {
+    }
+    catch (error) {
       if (notThrow) {
         core.setOutput('result', false)
-      } else {
+      }
+      else {
         throw error
       }
     }
-  } catch (error) {
+  }
+  catch (error) {
     if (error instanceof Error) {
       core.setFailed(error.message)
-    } else {
+    }
+    else {
       core.setFailed('An unexpected error occurred')
     }
   }

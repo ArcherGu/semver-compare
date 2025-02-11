@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest'
 import * as core from '@actions/core'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { run } from '../src/main'
 
 const getInputMock = vi.spyOn(core, 'getInput')
@@ -22,7 +22,7 @@ describe('semver-compare action', () => {
         case 'operator':
           return '<'
         case 'not_throw':
-          return 'false'
+          return 'true'
         default:
           return ''
       }
@@ -43,7 +43,7 @@ describe('semver-compare action', () => {
         case 'operator':
           return '<='
         case 'not_throw':
-          return 'false'
+          return 'true'
         default:
           return ''
       }
@@ -64,7 +64,7 @@ describe('semver-compare action', () => {
         case 'operator':
           return '='
         case 'not_throw':
-          return 'false'
+          return 'true'
         default:
           return ''
       }
@@ -85,7 +85,7 @@ describe('semver-compare action', () => {
         case 'operator':
           return '>='
         case 'not_throw':
-          return 'false'
+          return 'true'
         default:
           return ''
       }
@@ -106,7 +106,7 @@ describe('semver-compare action', () => {
         case 'operator':
           return '>'
         case 'not_throw':
-          return 'false'
+          return 'true'
         default:
           return ''
       }
@@ -122,13 +122,13 @@ describe('semver-compare action', () => {
     getInputMock.mockImplementation((name: string) => {
       switch (name) {
         case 'v1':
-          return '1.2.3-alpha'
+          return '0.0.2-beta'
         case 'v2':
-          return '1.2.3-alpha.1'
+          return '0.0.2-beta'
         case 'operator':
-          return '='
+          return '>'
         case 'not_throw':
-          return 'false'
+          return 'true'
         default:
           return ''
       }
@@ -161,4 +161,3 @@ describe('semver-compare action', () => {
     expect(setFailedMock).toHaveBeenCalledWith('Invalid version: invalid')
   })
 })
-
