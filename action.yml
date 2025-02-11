@@ -1,4 +1,4 @@
-name: "Semver Compare"
+name: "Compare Semver"
 description: "Compare two semantic versions with specified operator"
 author: "ArcherGu"
 branding:
