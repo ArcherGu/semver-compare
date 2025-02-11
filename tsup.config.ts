@@ -1,10 +1,9 @@
 import { defineConfig } from 'tsup'
 
 export default defineConfig({
+  name: 'semver-compare-action',
   entry: ['src/index.ts'],
-  format: ['cjs'],
-  target: 'node16',
-  splitting: false,
-  sourcemap: true,
   clean: true,
+  splitting: false,
+  noExternal: ['@actions/core'],
 })
