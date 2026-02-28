@@ -65,9 +65,9 @@ jobs:
         uses: ./ # Uses an action in the root directory
         id: compare-versions
         with:
-          v1: "v1.0.0"
-          v2: "v1.0.1"
-          operator: ">"
+          v1: v1.0.0
+          v2: v1.0.1
+          operator: '>'
           not_throw: true
 
       - name: Get Outputs

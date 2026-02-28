@@ -1,0 +1,8 @@
+trustPolicy: no-downgrade
+
+shellEmulator: true
+
+onlyBuiltDependencies:
+  - '@swc/core'
+  - esbuild
+  - simple-git-hooks

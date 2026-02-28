@@ -2,6 +2,8 @@ import * as core from '@actions/core'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { run } from '../src/main'
 
+vi.mock('@actions/core', { spy: true })
+
 const getInputMock = vi.spyOn(core, 'getInput')
 const setOutputMock = vi.spyOn(core, 'setOutput')
 const setFailedMock = vi.spyOn(core, 'setFailed')
