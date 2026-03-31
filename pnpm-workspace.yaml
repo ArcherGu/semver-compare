@@ -1,8 +1,9 @@
 trustPolicy: no-downgrade
+trustPolicyExclude:
+  - semver@6.3.1
 
 shellEmulator: true
 
 onlyBuiltDependencies:
-  - '@swc/core'
   - esbuild
   - simple-git-hooks
