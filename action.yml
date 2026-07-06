@@ -25,5 +25,5 @@ outputs:
     description: Result of the comparison (true/false)
 
 runs:
-  using: node20
+  using: node24
   main: dist/index.js
