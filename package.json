@@ -24,11 +24,12 @@
     "@lightwing/eslint-config": "^1.0.155",
     "@types/node": "^25.9.1",
     "@types/semver": "^7.7.1",
+    "@typescript/native": "npm:typescript@7.0.2",
     "eslint": "^10.4.1",
     "lint-staged": "^17.0.2",
     "simple-git-hooks": "^2.13.1",
     "tsdown": "^0.22.1",
-    "typescript": "^6.0.3",
+    "typescript": "npm:@typescript/typescript6@6.0.2",
     "vitest": "^4.1.7"
   },
   "simple-git-hooks": {
